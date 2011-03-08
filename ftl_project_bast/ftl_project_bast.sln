@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ftl_project_bast", "ftl_project_bast.vcproj", "{2386330F-150F-439C-94AE-B3BB592B810B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2386330F-150F-439C-94AE-B3BB592B810B}.Debug|Win32.ActiveCfg = Debug|Win32
+		{2386330F-150F-439C-94AE-B3BB592B810B}.Debug|Win32.Build.0 = Debug|Win32
+		{2386330F-150F-439C-94AE-B3BB592B810B}.Release|Win32.ActiveCfg = Release|Win32
+		{2386330F-150F-439C-94AE-B3BB592B810B}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
