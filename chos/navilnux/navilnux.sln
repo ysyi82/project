@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "navilnux", "navilnux.vcproj", "{37DEFBF9-D849-451F-9E6C-16B3C6B0E736}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{37DEFBF9-D849-451F-9E6C-16B3C6B0E736}.Debug|Win32.ActiveCfg = Debug|Win32
+		{37DEFBF9-D849-451F-9E6C-16B3C6B0E736}.Debug|Win32.Build.0 = Debug|Win32
+		{37DEFBF9-D849-451F-9E6C-16B3C6B0E736}.Release|Win32.ActiveCfg = Release|Win32
+		{37DEFBF9-D849-451F-9E6C-16B3C6B0E736}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
