@@ -10,24 +10,57 @@
 ==========================================================================================================================*/
 .globl _ram_entry
 _ram_entry:
-	bl	main	   // C 함수의 main함수를 호출한다. 	
+	b	kernel_init
 	b	_ram_entry // main 함수의 호출이 끝났다면 재 호출한다. 
 	b	navilnux_swiHandler
 	b	navilnux_irqHandler
 
+#define svc_stack 0xa0300000
+#define irq_stack 0xa0380000
+#define sys_stack 0xa4000000
+
+
+.global kernel_init
+kernel_init:
+	msr		cpsr_c,#0xc0|0x13	//SVC mode
+	ldr		r0,=svc_stack
+	sub		sp,r0,#4
+
+    msr		cpsr_c,#0xc0|0x12    //IRQ mode
+    ldr     r0,=irq_stack
+    sub     sp,r0,#4
+
+	msr		cpsr_c,#0xc0|0x13	//SYSTEM mode
+	ldr		r0,=sys_stack
+	sub		sp,r0,#4
+
+    msr     cpsr_c,#0xc0|0x13
+
+    bl      main
+    b       _ram_entry
+
 .global navilnux_swiHandler
 navilnux_swiHandler:
-	stmfd	sp!,{r0-r12, r14}
-	mrs	r1, spsr
-	stmfd	sp!,{r1}
-	ldr	r10, [lr, #-4]
-	bic	r10, r10, #0xff000000
-	mov	r0,	r10
-	bl	swiHandler
-	ldmfd	sp!,{r1}
-	msr	spsr_cxsf, r1
-	ldmfd	sp!,{r0-r12, pc}^
+    stmfd   sp!,{r0-r12,r14}
+    mrs     r1,spsr
+    stmfd   sp!,{r1}
+    ldr     r10,[lr,#-4]
+    bic     r10,r10,#0xff000000
+    mov     r0,r10
+    bl      swiHandler
+    ldmfd   sp!,{r1}
+    msr     spsr_cxsf,r1
+    ldmfd   sp!,{r0-r12,pc}^
 
 .global navilnux_irqHandler
-navilnux_irqHandler:
-	bl	irqHandler
+navilnux_irqHandler:    
+    sub     lr,lr,#4
+    stmfd   sp!,{lr}
+    stmfd   sp!,{r0-r14}^
+    mrs     r1,spsr
+    stmfd   sp!,{r1}
+    bl      irqHandler
+    ldmfd   sp!,{r1}
+    msr     spsr_cxsf,r1
+    ldmfd   sp!,{r0-r14}^
+    ldmfd   sp!,{pc}^

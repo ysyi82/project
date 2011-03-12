@@ -243,11 +243,19 @@
 			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
 			>
 			<File
+				RelativePath=".\copykernel.bat"
+				>
+			</File>
+			<File
 				RelativePath=".\main-ld-script"
 				>
 			</File>
 			<File
 				RelativePath=".\Makefile"
+				>
+			</File>
+			<File
+				RelativePath=".\navilnux.txt"
 				>
 			</File>
 		</Filter>
