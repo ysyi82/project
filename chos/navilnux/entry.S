@@ -53,22 +53,6 @@ navilnux_swiHandler:
     ldmfd   sp!,{r0-r12,pc}^
 
 .global navilnux_irqHandler
-<<<<<<< HEAD
-<<<<<<< HEAD
-navilnux_irqHandler:
-	sub lr,lr,#4
-	stmfd sp!,{lr}
-	stmfd sp!,{r0-r14}^
-	mrs r1,spsr
-	stmfd sp!,{r1}
-	bl irqHandler
-	ldmfd sp!,{r1}
-	msr spsr_cxsf,r1
-	ldmfd sp!,{r0-r14}^
-	ldmfd sp!,{pc}^
-=======
-=======
->>>>>>> 68609ce8f05d92d192eaf8057acdea68d69f2f24
 navilnux_irqHandler:    
     sub     lr,lr,#4
     stmfd   sp!,{lr}
@@ -80,7 +64,3 @@ navilnux_irqHandler:
     msr     spsr_cxsf,r1
     ldmfd   sp!,{r0-r14}^
     ldmfd   sp!,{pc}^
-<<<<<<< HEAD
->>>>>>> origin
-=======
->>>>>>> 68609ce8f05d92d192eaf8057acdea68d69f2f24

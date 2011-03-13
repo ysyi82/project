@@ -1,0 +1,1 @@
+copy navilnux_img "C:\Program Files\Choung Networks\Token2 Plus\upload"
