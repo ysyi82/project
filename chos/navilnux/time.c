@@ -135,8 +135,7 @@ void    ReloadTimer( unsigned char bTimer, unsigned int msec )
         	case 2 : OSMR2 = OSCR + (TICKS_PER_SECOND/1000)*msec; break;
         	case 3 : OSMR3 = OSCR + (TICKS_PER_SECOND/1000)*msec; break;
         }
-        
-        
+                
         // 타이머 인터럽트 활성화
         OIER = OIER | reg;
 }
