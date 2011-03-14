@@ -179,6 +179,18 @@
 				>
 			</File>
 			<File
+				RelativePath=".\navilnux_memory.c"
+				>
+			</File>
+			<File
+				RelativePath=".\navilnux_task.c"
+				>
+			</File>
+			<File
+				RelativePath=".\navilnux_user.c"
+				>
+			</File>
+			<File
 				RelativePath=".\printf.c"
 				>
 			</File>
@@ -209,7 +221,19 @@
 				>
 			</File>
 			<File
-				RelativePath=".\navilnux.h"
+				RelativePath=".\include\navilnux.h"
+				>
+			</File>
+			<File
+				RelativePath=".\include\navilnux_memory.h"
+				>
+			</File>
+			<File
+				RelativePath=".\include\navilnux_task.h"
+				>
+			</File>
+			<File
+				RelativePath=".\include\navilnux_user.h"
 				>
 			</File>
 			<File

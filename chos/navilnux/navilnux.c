@@ -1,5 +1,8 @@
 #include <navilnux.h>
 
+extern Navil_mem_mng memmng;
+extern Navil_task_mng taskmng;
+
 void swiHandler(unsigned int syscallnum)
 {
 	printf("system call %d\n", syscallnum);
@@ -44,22 +47,37 @@ void irq_disable(void)
 	__asm__("msr    cpsr_c,#0xc0|0x13");
 }
 
-int main(void)
+void navilnux_init(void)
 {
-	int a = 1;
-	int b = 2;
-	int c = 0;
+	mem_init();
+	task_init();
 
-	c = a + b;
 	os_timer_init();
 	os_timer_start();
+}
+
+int main(void)
+{
+	navilnux_init();
+	navilnux_user();
 
 	irq_enable();
 
+	int i;
+	for( i = 0; i <= taskmng.max_task_id; i++ )
+	{
+		printf("TCB : TASK%d - init PC(%p) \t init SP(%p)\n", i+1,
+			taskmng.free_task_pool[i].context_pc,
+			taskmng.free_task_pool[i].context_sp);
+
+	}
+
+	printf("REAL func TASK1 : %p\n", user_task_1);
+	printf("REAL func TASK2 : %p\n", user_task_2);
+	printf("REAL func TASK3 : %p\n", user_task_3);
+
 	while(1)
 	{
-		printf("kernel stack a(%p), b(%p), c(%p)\n", &a, &b, &c);
-		__asm__("swi 77");
 		msleep(1000);
 	}
 	return 0;
