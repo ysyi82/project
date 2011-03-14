@@ -11,7 +11,10 @@ LDFLAGS   = -static -nostdlib -nostartfiles -nodefaultlibs -p -X -T ./main-ld-sc
                 
 OCFLAGS = -O binary -R .note -R .comment -S
 
-all: navilnux.c
+CFILES = navilnux.c navilnux_memory.c navilnux_task.c navilnux_user.c
+HFILES = include/navilnux_memory.h include/navilnux.h include/navilnux_task.h include/navilnux_user.h
+
+all: $(CFILES) $(HFILES)
 	$(CC) -c $(CFLAGS) -o entry.o entry.S
 	$(CC) -c $(CFLAGS) -o gpio.o gpio.c
 	$(CC) -c $(CFLAGS) -o time.o time.c
@@ -21,7 +24,11 @@ all: navilnux.c
 	$(CC) -c $(CFLAGS) -o serial.o serial.c
 	$(CC) -c $(CFLAGS) -o lib1funcs.o lib1funcs.S
 	$(CC) -c $(CFLAGS) -o navilnux.o navilnux.c
-	$(LD) $(LDFLAGS) -o navilnux_elf entry.o gpio.o time.o vsprintf.o printf.o string.o serial.o lib1funcs.o navilnux.o 
+	$(CC) -c $(CFLAGS) -o navilnux_memory.o navilnux_memory.c
+	$(CC) -c $(CFLAGS) -o navilnux_task.o navilnux_task.c
+	$(CC) -c $(CFLAGS) -o navilnux_user.o navilnux_user.c
+	$(LD) $(LDFLAGS) -o navilnux_elf entry.o gpio.o time.o vsprintf.o printf.o string.o serial.o lib1funcs.o \
+		navilnux.o navilnux_memory.o navilnux_task.o navilnux_user.o
 	$(OC) $(OCFLAGS) navilnux_elf navilnux_img
 
 clean:
