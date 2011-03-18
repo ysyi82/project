@@ -41,6 +41,34 @@ kernel_init:
 
 .global navilnux_swiHandler
 navilnux_swiHandler:
+#if 1
+    msr     cpsr_c, #0xc0|0x13
+
+    ldr     sp, =svc_stack
+
+    stmfd   sp!, {lr}
+    stmfd   sp!, {r1-r14}^
+    mrs     r10, spsr
+    stmfd   sp!, {r10}
+
+    ldr     r10, [lr,#-4]
+    bic     r10, r10, #0xff000000
+    mov     r11, #4
+    mul     r10, r10, r11
+
+    ldr     r11, =navilnux_syscallvec
+    add     r11, r11, r10
+    ldr     r11, [r11]
+    mov     lr, pc
+    mov     pc, r11
+
+    ldmfd   sp!, {r1}
+    msr     spsr_cxsf, r1
+    ldmfd   sp!, {r1-r14}^
+    ldmfd   sp!, {pc}^
+
+	
+#else
     stmfd   sp!,{r0-r12,r14}
     mrs     r1,spsr
     stmfd   sp!,{r1}
@@ -51,9 +79,40 @@ navilnux_swiHandler:
     ldmfd   sp!,{r1}
     msr     spsr_cxsf,r1
     ldmfd   sp!,{r0-r12,pc}^
-
+#endif
 .global navilnux_irqHandler
-navilnux_irqHandler:    
+navilnux_irqHandler:
+#if 1
+	msr		cpsr_c, #0xc0|0x12
+	
+	ldr		sp, =navilnux_current
+	ldr		sp, [sp]
+
+	sub		lr,lr,#4
+	add		sp,sp,#4
+	stmia	sp!,{r0-r12}^
+	stmia	sp!,{sp,lr}^
+	stmia	sp!,{lr}
+
+	sub		sp, sp, #68
+	mrs		r1, spsr
+	stmia	sp!, {r1}
+
+	ldr		sp, =irq_stack
+	
+	bl		irqHandler
+
+	ldr		sp, =navilnux_next
+	ldr		sp, [sp]
+
+	ldmia	sp!, {r1}
+	msr		spsr_cxsf, r1
+	ldmia	sp!, {r0-r12}^
+	ldmia	sp!, {r13,r14}^
+
+	ldmia	sp!, {pc}^
+
+#else
     sub     lr,lr,#4
     stmfd   sp!,{lr}
     stmfd   sp!,{r0-r14}^
@@ -64,3 +123,4 @@ navilnux_irqHandler:
     msr     spsr_cxsf,r1
     ldmfd   sp!,{r0-r14}^
     ldmfd   sp!,{pc}^
+#endif

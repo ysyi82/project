@@ -183,6 +183,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\navilnux_sys.c"
+				>
+			</File>
+			<File
 				RelativePath=".\navilnux_task.c"
 				>
 			</File>
@@ -225,7 +229,15 @@
 				>
 			</File>
 			<File
+				RelativePath=".\include\navilnux_lib.h"
+				>
+			</File>
+			<File
 				RelativePath=".\include\navilnux_memory.h"
+				>
+			</File>
+			<File
+				RelativePath=".\include\navilnux_sys.h"
 				>
 			</File>
 			<File
@@ -254,6 +266,10 @@
 			</File>
 			<File
 				RelativePath=".\include\string.h"
+				>
+			</File>
+			<File
+				RelativePath=".\include\syscalltbl.h"
 				>
 			</File>
 			<File
@@ -292,6 +308,10 @@
 			</File>
 			<File
 				RelativePath=".\lib1funcs.S"
+				>
+			</File>
+			<File
+				RelativePath=".\navilnux_lib.S"
 				>
 			</File>
 		</Filter>
