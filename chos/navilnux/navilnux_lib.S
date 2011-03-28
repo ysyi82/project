@@ -20,6 +20,16 @@ itc_get:
 	swi SYS_ITCGET
 	mov pc, lr
 
+.global sem_p
+sem_p:
+	swi SYS_SEMP
+	mov pc, lr
+
+.global sem_v
+sem_v:
+	swi SYS_SEMV
+	mov pc, lr
+
 .global call_scheduler
 call_scheduler:
 	swi SYS_CALLSCHED

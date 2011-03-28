@@ -25,3 +25,30 @@ int navilnux_itc_get(int itcnum)
 		}
 	}
 }
+
+
+int navilnux_sem_p(int semnum)
+{
+	int ret_value = 0;
+
+	while( 1 )
+	{
+		ret_value = sem_p(semnum);
+		if( ret_value == 0 )
+		{
+			return 0;
+		} else if( ret_value == -1 )
+		{
+			return -1;
+		} else
+		{
+			call_scheduler();
+		}
+	}
+}
+
+
+int navilnux_sem_v(int semnum)
+{
+	return sem_v(semnum);
+}

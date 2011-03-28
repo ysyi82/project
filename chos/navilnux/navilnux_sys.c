@@ -26,10 +26,22 @@ int sys_itcget(int itcnum, int *data)
 	return msgmng.itc_get(itcnum, data);
 }
 
+int sys_semp(int semnum)
+{
+	return msgmng.sem_p(semnum);
+}
+
+int sys_semv(int semnum)
+{
+	return msgmng.sem_v(semnum);
+}
+
 void syscall_init(void)
 {
 	navilnux_syscallvec[SYS_MYSYSCALL] = (unsigned int)sys_mysyscall;
 	navilnux_syscallvec[SYS_MYSYSCALL4] = (unsigned int)sys_mysyscall4;
 	navilnux_syscallvec[SYS_ITCSEND] = (unsigned int)sys_itcsend;
 	navilnux_syscallvec[SYS_ITCGET] = (unsigned int)sys_itcget;
+	navilnux_syscallvec[SYS_SEMP] = (unsigned int)sys_semp;
+	navilnux_syscallvec[SYS_SEMV] = (unsigned int)sys_semv;
 }
