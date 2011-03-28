@@ -179,7 +179,15 @@
 				>
 			</File>
 			<File
+				RelativePath=".\navilnux_clib.c"
+				>
+			</File>
+			<File
 				RelativePath=".\navilnux_memory.c"
+				>
+			</File>
+			<File
+				RelativePath=".\navilnux_msg.c"
 				>
 			</File>
 			<File
@@ -234,6 +242,10 @@
 			</File>
 			<File
 				RelativePath=".\include\navilnux_memory.h"
+				>
+			</File>
+			<File
+				RelativePath=".\include\navilnux_msg.h"
 				>
 			</File>
 			<File

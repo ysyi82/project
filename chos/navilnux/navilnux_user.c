@@ -11,8 +11,12 @@ void user_task_1(void)
 	b = 2;
 	c = a + b;
 
-	while(1){
+	while( 1 )
+	{
 		printf("TASK1 - a:%p\tb:%p\tc:%p\n", &a, &b, &c);
+		//printf("Before call Scheduler\n");
+		//call_scheduler();
+		//printf("After call Scheduler\n");
 		msleep(1000);
 	}
 }
@@ -25,11 +29,19 @@ void user_task_2(void)
 	b = 2;
 	c = a + b;
 
-	while(1)
+	while( 1 )
 	{
 		printf("TASK2 - a:%p\tb:%p\tc:%p\n", &a, &b, &c);
-		//c = mysyscall4(4,5,6,7);
-		//printf("Syscall4 return value is %d\n", c);
+
+		printf("ITC Count is %d\n", a);
+		if( a == 3 )
+		{
+			navilnux_itc_send(2, 342);
+			a = 1;
+			printf("ITC send!!!\n");
+		}
+		a++;
+
 		msleep(1000);
 	}
 }
@@ -42,11 +54,14 @@ void user_task_3(void)
 	b = 2;
 	c = a + b;
 
-	while(1)
+	while( 1 )
 	{
+		//printf("TASK3 - a:%p\tb:%p\tc:%p\n", &a, &b, &c);
+		//c = mysyscall(1,2,3);
+		c = navilnux_itc_get(2);
 		printf("TASK3 - a:%p\tb:%p\tc:%p\n", &a, &b, &c);
-		c = mysyscall(1,2,3);
-		printf("Syscall return value is %d\n", c);
+		printf("ITC get!!!!! ---> %d\n",c );
+
 		msleep(1000);
 	}
 }
